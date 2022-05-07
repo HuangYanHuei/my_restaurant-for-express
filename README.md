@@ -4,9 +4,9 @@
 
 ## 專案畫面
 
-![image](https://github.com/HuangYanHuei/my_restaurant-for-express/tree/main/public/img/info1.png)
+![image](https://github.com/HuangYanHuei/my_restaurant-for-express/blob/main/public/img/info2.png?raw=true)
 
-![image](https://github.com/HuangYanHuei/my_restaurant-for-express/tree/main/public/img/info2.png)
+![image](https://github.com/HuangYanHuei/my_restaurant-for-express/blob/main/public/img/info2.png?raw=true)
 
 ## Features - 產品功能
 
@@ -62,4 +62,5 @@ The Express server is running on http://localhost:3000
 7. 開啟任一瀏覽器瀏覽器輸入 [http://localhost:3000](http://localhost:3000) 
 
 ## Contributor - 專案開發人員
+
 [HuangYanHuei](https://github.com/HuangYanHuei)
