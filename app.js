@@ -1,19 +1,23 @@
+//宣告框架、port
 const express = require('express')
 const app = express()
 const port = 3000
-
+//渲染套件
 const exphbs = require('express-handlebars')
+//餐廳JSON檔
 const restaurantList = require('./restaurant.json')
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+
+//靜態檔案
 app.use(express.static('public'))
 
-
+//首頁路由
 app.get('/', (req, res) => {
   res.render('index', { restaurants: restaurantList.results })
 })
-
+//搜尋路由
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
   const keyword2 = keyword.toLowerCase().trim()
@@ -22,14 +26,14 @@ app.get('/search', (req, res) => {
   })
   res.render('index', { restaurants: restaurants, keyword: keyword })
 })
-
+//點擊餐廳顯示詳細資料路由
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const restaurants = restaurantList.results.find(restaurants =>
     restaurants.id.toString() === req.params.restaurant_id)
 
   res.render('show', { restaurants: restaurants })
 })
-
+//監聽器
 app.listen(port, () => {
-  console.log('ok')
+  console.log(`The server is listening on http://localhost:${port}`)
 })
