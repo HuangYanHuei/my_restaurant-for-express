@@ -2,12 +2,14 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+// 引用 body-parser
+const bodyParser = require('body-parser')
 const port = 3000
 //渲染套件
 const exphbs = require('express-handlebars')
-//餐廳JSON檔
-const restaurantList = require('./restaurant.json')
 // 設定連線到 mongoDB
+const Restaurant = require('./models/my_restaurant') // 載入 Todo model
+
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // 取得資料庫連線狀態
@@ -21,16 +23,31 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
-app.set('view engine', 'handlebars')
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
 
 //靜態檔案
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
 
 //首頁路由
 app.get('/', (req, res) => {
-  res.render('index', { restaurants: restaurantList.results })
+  Restaurant.find() // 取出 Todo model 裡的所有資料
+    .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+    .then(restaurants => res.render('index', { restaurants })) // 將資料傳給 index 樣板
+    .catch(error => console.error(error)) // 錯誤處理
 })
+//新增餐廳路由
+app.get('/my_restaurant/new', (req, res) => {
+  return res.render('new')
+})
+
+app.post('/my_restaurant', (req, res) => {
+  return Restaurant.create(req.body)     // 存入資料庫
+    .then(() => res.redirect('/')) // 新增完成後導回首頁
+    .catch(error => console.log(error))
+})
+
 //搜尋路由
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
@@ -47,6 +64,9 @@ app.get('/restaurants/:restaurant_id', (req, res) => {
 
   res.render('show', { restaurants: restaurants })
 })
+
+app.use(bodyParser.urlencoded({ extended: true }))
+
 //監聽器
 app.listen(port, () => {
   console.log(`The server is listening on http://localhost:${port}`)
