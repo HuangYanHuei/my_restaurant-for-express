@@ -1,6 +1,6 @@
 # 我的餐廳清單
 
-一個使用 Node.js + Express 打造的餐廳美食網站，可以查詢餐廳名稱、類別，以及查看餐廳詳細資料
+一個使用 Node.js + Express 打造的餐廳美食網站
 
 ## 專案畫面
 
@@ -10,10 +10,11 @@
 
 ## Features - 產品功能
 
-1. 使用者可以點擊任一餐廳，查看更多餐廳資訊，如地址、電話與簡介
-2. 使用者可以依照中文名稱、英文名稱與餐廳類別進行搜尋
-3. 使用者可以瀏覽一家餐廳的詳細資訊
-4. 使用者可以瀏覽全部所有餐廳
+1.使用者可以新增一家餐廳
+2.使用者可以瀏覽一家餐廳的詳細資訊
+3.使用者可以瀏覽全部所有餐廳
+4.使用者可以修改一家餐廳的資訊
+5.使用者可以刪除一家餐廳
 
 ## Environment SetUp - 環境建置
 
@@ -47,19 +48,25 @@ cd my_restaurant-for-express
 在 Terminal 輸入 nodemon app.js 指令
 ```
 
-5. 啟動伺服器，執行 app.js 檔案
+5. 匯入種子檔案
+
+```
+node models/seeds/restaurantSeeder.js
+```
+
+6. 啟動伺服器，執行 app.js 檔案
 
 ```
 nodemon app.js
 ```
 
-6. 當 terminal 出現以下字樣，表示伺服器已啟動並成功連結
+7. 當 terminal 出現以下字樣，表示伺服器已啟動並成功連結
 
 ```
 The Express server is running on http://localhost:3000
 ```
 
-7. 開啟任一瀏覽器瀏覽器輸入 [http://localhost:3000](http://localhost:3000) 
+8. 開啟任一瀏覽器瀏覽器輸入 [http://localhost:3000](http://localhost:3000) 
 
 ## Contributor - 專案開發人員
 
