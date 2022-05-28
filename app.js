@@ -58,11 +58,41 @@ app.get('/search', (req, res) => {
   res.render('index', { restaurants: restaurants, keyword: keyword })
 })
 //點擊餐廳顯示詳細資料路由
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurants = restaurantList.results.find(restaurants =>
-    restaurants.id.toString() === req.params.restaurant_id)
+app.get('/my_restaurant/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurants) => res.render('show', { restaurants }))
+    .catch(error => console.log(error))
+})
 
-  res.render('show', { restaurants: restaurants })
+//修改餐廳路由
+app.get('/my_restaurant/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurants) => res.render('edit', { restaurants }))
+    .catch(error => console.log(error))
+})
+
+//修改後update資料庫路由
+app.post('/my_restaurant/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)   // 存入資料庫
+    .then(restaurants => {
+      return restaurants.update(req.body)
+    })
+    .then(() => res.redirect(`/my_restaurant/${id}`))
+    .catch(error => console.log(error))
+})
+
+//刪除路由
+app.post('/my_restaurant/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurants => restaurants.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 app.use(bodyParser.urlencoded({ extended: true }))
