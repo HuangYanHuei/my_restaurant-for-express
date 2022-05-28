@@ -4,9 +4,7 @@
 
 ## 專案畫面
 
-![image](https://github.com/HuangYanHuei/my_restaurant-for-express/blob/main/public/img/info1.png?raw=true)
-
-![image](https://github.com/HuangYanHuei/my_restaurant-for-express/blob/main/public/img/info2.png?raw=true)
+![image](https://github.com/HuangYanHuei/my_restaurant-for-express/blob/main/public/img/1.png?raw=true)
 
 ## Features - 產品功能
 
