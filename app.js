@@ -49,13 +49,25 @@ app.post('/my_restaurant', (req, res) => {
 })
 
 //搜尋路由
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  const keyword2 = keyword.toLowerCase().trim()
-  const restaurants = restaurantList.results.filter(restaurants => {
-    return restaurants.name.toLowerCase().includes(keyword2) || restaurants.category.includes(keyword2)
-  })
-  res.render('index', { restaurants: restaurants, keyword: keyword })
+app.get("/search", (req, res) => {
+  if (!req.query.keywords) {
+    return res.redirect("/")
+  }
+
+  const keywords = req.query.keywords
+  const keyword = req.query.keywords.trim().toLowerCase()
+
+  Restaurant.find({})
+    .lean()
+    .then(restaurants => {
+      const restaurantsData = restaurants.filter(
+        data =>
+          data.name.toLowerCase().includes(keyword) ||
+          data.category.includes(keyword)
+      )
+      res.render("index", { restaurants: restaurantsData, keywords })
+    })
+    .catch(err => console.log(err))
 })
 //點擊餐廳顯示詳細資料路由
 app.get('/my_restaurant/:id', (req, res) => {
