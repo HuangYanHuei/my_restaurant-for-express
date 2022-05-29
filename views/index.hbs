@@ -11,6 +11,25 @@
             aria-describedby="search-button" value="{{keywords}}" />
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            <div class="dropdown">
+              <button class="btn btn-outline-success dropdown-toggle" type="button" id="sortBottom"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                排序
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="sortBottom">
+                {{#if keywords}}
+                <li><a class="dropdown-item" href="?keywords={{ keywords }}&value=1">A → Z</a></li>
+                <li><a class="dropdown-item" href="?keywords={{ keywords }}&value=2">Z → A</a></li>
+                <li><a class="dropdown-item" href="?keywords={{ keywords }}&value=3">類別</a></li>
+                <li><a class="dropdown-item" href="?keywords={{ keywords }}&value=4">地區</a></li>
+                {{else}}
+                <li><a class="dropdown-item" href="?value=1">A → Z</a></li>
+                <li><a class="dropdown-item" href="?value=2">Z → A</a></li>
+                <li><a class="dropdown-item" href="?value=3">類別</a></li>
+                <li><a class="dropdown-item" href="?value=4">地區</a></li>
+                {{/if}}
+              </ul>
+            </div>
           </div>
         </div>
       </form>
