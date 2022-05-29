@@ -36,7 +36,7 @@ router.put('/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)   // 存入資料庫
     .then(restaurants => {
-      return restaurants.update(req.body)
+      return restaurants.updateOne(req.body)
     })
     .then(() => res.redirect(`/my_restaurant/${id}`))
     .catch(error => console.log(error))
