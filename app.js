@@ -4,6 +4,7 @@ const app = express()
 const mongoose = require('mongoose')
 // 引用 body-parser
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const port = 3000
 //渲染套件
 const exphbs = require('express-handlebars')
@@ -29,6 +30,9 @@ app.set('view engine', 'hbs')
 //靜態檔案
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 //首頁路由
 app.get('/', (req, res) => {
@@ -88,7 +92,7 @@ app.get('/my_restaurant/:id/edit', (req, res) => {
 })
 
 //修改後update資料庫路由
-app.post('/my_restaurant/:id/edit', (req, res) => {
+app.put('/my_restaurant/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)   // 存入資料庫
     .then(restaurants => {
@@ -99,15 +103,13 @@ app.post('/my_restaurant/:id/edit', (req, res) => {
 })
 
 //刪除路由
-app.post('/my_restaurant/:id/delete', (req, res) => {
+app.delete('/my_restaurant/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurants => restaurants.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
-
-app.use(bodyParser.urlencoded({ extended: true }))
 
 //監聽器
 app.listen(port, () => {
