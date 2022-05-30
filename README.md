@@ -41,10 +41,10 @@ cd my_restaurant
 在 Terminal 輸入 npm install 指令
 ```
 
-4. Connect MongoDB
+4. 安裝完畢後，設定環境變數連線 MongoDB
 
 ```
-export MONGODB_URI="your MongoDB URI, account, password"
+MONGODB_URI=mongodb+srv://<Your MongoDB Account>:<Your MongoDB Password>@cluster0.xxxx.xxxx.net/<Your MongoDB Table><?retryWrites=true&w=majority
 ```
 
 5. 安裝 nodemon 套件
@@ -53,25 +53,19 @@ export MONGODB_URI="your MongoDB URI, account, password"
 npm install -g nodemon
 ```
 
-6. 匯入種子檔案
-
-```
-node models/seeds/restaurantSeeder.js
-```
-
-7. 啟動伺服器，執行 app.js 檔案
+6. 啟動伺服器，執行 app.js 檔案
 
 ```
 npm run dev
 ```
 
-8. 當 terminal 出現以下字樣，表示伺服器已啟動並成功連結
+7. 當 terminal 出現以下字樣，表示伺服器已啟動並成功連結
 
 ```
 The Express server is running on http://localhost:3000
 ```
 
-9. 開啟任一瀏覽器瀏覽器輸入 [http://localhost:3000](http://localhost:3000) 
+8. 開啟任一瀏覽器瀏覽器輸入 [http://localhost:3000](http://localhost:3000) 
 
 ## Contributor - 專案開發人員
 
