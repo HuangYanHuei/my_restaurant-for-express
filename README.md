@@ -32,7 +32,7 @@ git clone https://github.com/HuangYanHuei/my_restaurant-for-express.git
 2. 開啟終端機，進入存放此專案的資料夾
 
 ```
-cd my_restaurant-for-express
+cd my_restaurant
 ```
 
 3. 安裝 npm 套件
@@ -41,31 +41,37 @@ cd my_restaurant-for-express
 在 Terminal 輸入 npm install 指令
 ```
 
-4. 安裝 nodemon 套件
+4. Connect MongoDB
 
 ```
-在 Terminal 輸入 nodemon app.js 指令
+export MONGODB_URI="your MongoDB URI, account, password"
 ```
 
-5. 匯入種子檔案
+5. 安裝 nodemon 套件
+
+```
+npm install -g nodemon
+```
+
+6. 匯入種子檔案
 
 ```
 node models/seeds/restaurantSeeder.js
 ```
 
-6. 啟動伺服器，執行 app.js 檔案
+7. 啟動伺服器，執行 app.js 檔案
 
 ```
-nodemon app.js
+npm run dev
 ```
 
-7. 當 terminal 出現以下字樣，表示伺服器已啟動並成功連結
+8. 當 terminal 出現以下字樣，表示伺服器已啟動並成功連結
 
 ```
 The Express server is running on http://localhost:3000
 ```
 
-8. 開啟任一瀏覽器瀏覽器輸入 [http://localhost:3000](http://localhost:3000) 
+9. 開啟任一瀏覽器瀏覽器輸入 [http://localhost:3000](http://localhost:3000) 
 
 ## Contributor - 專案開發人員
 
