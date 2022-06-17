@@ -5,12 +5,11 @@ const router = express.Router()
 const Restaurant = require('../../models/my_restaurant')
 //首頁路由
 router.get('/', (req, res) => {
-
+  const userId = req.user._id
   const sort = Number(req.query.value) || 5
   const sortItem = ['name', '-name', 'category', 'location', '_id']
 
-
-  Restaurant.find() // 取出 Todo model 裡的所有資料
+  Restaurant.find({ userId }) // 取出 Todo model 裡的所有資料
     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
     .sort(sortItem[sort - 1])
     .then(restaurants => res.render('index', { restaurants })) // 將資料傳給 index 樣板
