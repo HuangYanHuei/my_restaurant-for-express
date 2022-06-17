@@ -1,5 +1,6 @@
 //宣告框架、port
 const express = require('express')
+const session = require('express-session')
 const app = express()
 // 引用 body-parser
 const bodyParser = require('body-parser')
@@ -13,6 +14,12 @@ require('./config/mongoose')
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 //靜態檔案
 app.use(express.static('public'))
