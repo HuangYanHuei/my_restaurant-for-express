@@ -10,6 +10,7 @@ const port = 3000
 const exphbs = require('express-handlebars')
 // 設定連線到 mongoDB
 const routes = require('./routes')
+const usePassport = require('./config/passport')
 require('./config/mongoose')
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
@@ -27,6 +28,10 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+
+// 呼叫 Passport 函式並傳入 app，這條要寫在路由之前
+usePassport(app)
+
 // 將 request 導入路由器
 app.use(routes)
 
