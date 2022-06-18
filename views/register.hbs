@@ -24,8 +24,15 @@
           <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
             placeholder="Confirm Password(必填）" required>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Register</button>
-        <a href="/auth/facebook" class="btn btn-info btn-block">Facebook Login</a>
+        <button type="submit" class="btn btn-info btn-block">Register</button>
+        <div class="row g-3">
+          <div class="col">
+            <a href="/auth/facebook" class="btn btn-primary btn-block mt-2">Facebook Login</a>
+          </div>
+          <div class="col">
+            <a href="/auth/google" class="btn btn-danger btn-block mt-2">Google Login</a>
+          </div>
+        </div>
       </form>
       <p class="lead mt-4">
         Have An Account? <a href="/users/login">Login</a>

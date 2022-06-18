@@ -6,14 +6,23 @@
       <form action="/users/login" method="POST">
         <div class="mb-3">
           <label for="email" class="mb-2"><span class="text-danger">*</span> Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" required>
         </div>
         <div class="mb-3">
           <label for="password" class="mb-2"><span class="text-danger">*</span> Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password"
+            required>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
-        <a href="/auth/facebook" class="btn btn-info btn-block">Facebook Login</a>
+        <button type="submit" class="btn btn-info btn-block">Login</button>
+        <div class="row g-3">
+          <div class="col">
+            <a href="/auth/facebook" class="btn btn-primary btn-block mt-2">Facebook Login</a>
+          </div>
+          <div class="col">
+            <a href="/auth/google" class="btn btn-danger btn-block mt-2">Google Login</a>
+          </div>
+        </div>
+      </form>
       </form>
       <p class="lead mt-4">
         No Account? <a href="/users/register">Register</a>
