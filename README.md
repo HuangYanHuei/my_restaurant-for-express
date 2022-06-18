@@ -4,7 +4,9 @@
 
 ## 專案畫面
 
-![image](https://github.com/HuangYanHuei/my_restaurant-for-express/blob/main/public/img/index.png?raw=true)
+![image](https://github.com/HuangYanHuei/my_restaurant-for-express/blob/main/public/img/1.png?raw=true)
+
+![image](https://github.com/HuangYanHuei/my_restaurant-for-express/blob/main/public/img/2.png?raw=true)
 
 ## Features - 產品功能
 
@@ -14,6 +16,8 @@
 4. 使用者可以修改一家餐廳的資訊
 5. 使用者可以刪除一家餐廳
 6. 使用者可以排序餐廳
+7. 使用者註冊登入功能
+8. 使用者自訂個人餐廳清單
 
 ## Environment SetUp - 環境建置
 
@@ -41,16 +45,24 @@ cd my_restaurant
 在 Terminal 輸入 npm install 指令
 ```
 
-4. 安裝完畢後，設定環境變數連線 MongoDB
+4. 安裝完畢後，設定環境變數連線 MongoDB，新創一個.env檔案，請模仿.env.example
 
 ```
+FACEBOOK_ID=SKIP
+FACEBOOK_SECRET=SKIP
+FACEBOOK_CALLBACK=http://localhost:3000/auth/facebook/callback
+GOOGLE_ID=SKIP
+GOOGLE_SECRET=SKIP
+GOOGLE_CALLBACK=http://localhost:3000/auth/google/callback
+SESSION_SECRET=ThisIsMySecret
 MONGODB_URI=mongodb+srv://<Your MongoDB Account>:<Your MongoDB Password>@cluster0.xxxx.xxxx.net/<Your MongoDB Table><?retryWrites=true&w=majority
+PORT=3000
 ```
 
-5. 安裝 nodemon 套件
+5. 載入種子資料
 
 ```
-npm install -g nodemon
+npm run seed
 ```
 
 6. 啟動伺服器，執行 app.js 檔案

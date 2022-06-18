@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   const sort = Number(req.query.value) || 5
   const sortItem = ['name', '-name', 'category', 'location', '_id']
 
-  Restaurant.find({ userId }) // 取出 Todo model 裡的所有資料
+  Restaurant.find({ userId }) // 取出  model 裡的所有資料
     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
     .sort(sortItem[sort - 1])
     .then(restaurants => res.render('index', { restaurants })) // 將資料傳給 index 樣板
@@ -22,20 +22,20 @@ router.get("/search", (req, res) => {
     return res.redirect("/")
   }
   const keywords = req.query.keywords
-  const keyword = req.query.keywords.toLowerCase().trim()
   const sort = Number(req.query.value) || 5
   const sortItem = ['name', '-name', 'category', 'location', '_id']
+  const reg = new RegExp(keywords, 'i') //不區分大小寫
 
-  Restaurant.find({})
+  Restaurant.find({
+    $or: [
+      { name: { $regex: reg } },
+      { category: { $regex: reg } }
+    ]
+  })
     .lean()
     .sort(sortItem[sort - 1])
     .then(restaurants => {
-      const restaurantsData = restaurants.filter(
-        data =>
-          data.name.toLowerCase().includes(keyword) ||
-          data.category.includes(keyword)
-      )
-      res.render("index", { restaurants: restaurantsData, keywords })
+      res.render("index", { restaurants, keywords })
     })
     .catch(err => console.log(err))
 })
