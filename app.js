@@ -2,13 +2,13 @@
 const express = require('express')
 const session = require('express-session')
 const app = express()
-// 引用 body-parser
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const flash = require('connect-flash')
 const port = 3000
-//渲染套件
+
 const exphbs = require('express-handlebars')
-// 設定連線到 mongoDB
+
 const routes = require('./routes')
 const usePassport = require('./config/passport')
 require('./config/mongoose')
@@ -32,10 +32,15 @@ app.use(methodOverride('_method'))
 // 呼叫 Passport 函式並傳入 app，這條要寫在路由之前
 usePassport(app)
 
+app.use(flash())
+
 //設定本地變數 res.locals
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
+  res.locals.error_msg = req.flash('error')
   next()
 })
 // 將 request 導入路由器
